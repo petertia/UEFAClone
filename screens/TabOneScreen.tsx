@@ -1,17 +1,47 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ImageBackground, SafeAreaView, Text, View, Pressable } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import BottomSheet from "@gorhom/bottom-sheet";
 import { RootTabScreenProps } from '../types';
+import TeamStats from "../components/TeamStats";
+import Field from '../components/Field';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+
+  const viewPlayers = () => {
+    console.warn('View player');
+
+  };
+
+  const snapPoints = [0, '50%', '100%']
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+    <SafeAreaView style={styles.container}>
+      <TeamStats />
+      <Field />
+
+      <Pressable 
+        onPress={viewPlayers} 
+        style={styles.buttonCOntainer}
+      > 
+        <Text>View Players</Text>
+      </Pressable>
+
+      <View style={styles.container}>
+      <BottomSheet
+
+        index={1}
+        snapPoints={snapPoints}
+
+      >
+        <View style={styles.contentContainer}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet>
     </View>
+
+
+    </SafeAreaView>
   );
 }
 
@@ -19,15 +49,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#72CC5E",
+    
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  buttonCOntainer: {
+    backgroundColor: "orange", 
+    width:"90%", 
+    margin:20, 
+    padding: 10,
+    alignItems: "center",
+    borderRadius: 50,
+    marginTop: "auto"
+
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+
+  contentContainer: {
+    
+  }
 });
